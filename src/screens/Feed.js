@@ -1,12 +1,38 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-export default class Feed extends React.Component{
-    
+import {ScrollView,View, Button, StyleSheet} from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+
+//components
+
+//Screens
+import Movie from './Movie';
+import { createAppContainer } from 'react-navigation';
+
+class FeedScreen extends React.Component{
+    static navigationOptions = {
+        title: 'Feed',
+      };
     render(){
         return(
-            <View>
-                <Text>Feed</Text>
-            </View>
+            <ScrollView>
+                
+            </ScrollView>
         )
     }
 }
+const FeedNavigator = createStackNavigator(
+    {
+      FeedScreen,
+      Movie
+    },
+    {
+        defaultNavigationOptions:{
+                headerStyle: {
+                    backgroundColor: '#6271ef',
+                },
+                headerTintColor: '#fff',
+                }   
+        } 
+  )
+
+export default FeedNavigator

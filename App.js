@@ -7,10 +7,18 @@ import Feed from './src/screens/Feed';
 import Search from './src/screens/Search';
 import Profile from './src/screens/Profile';
 
+
 const TabAppNavigator = createBottomTabNavigator({
   Feed,
   Search,
   Profile
+},
+{
+  initialRouteName: 'Feed',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'grey'
+  }
 })
 
 
