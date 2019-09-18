@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { 
     StyleSheet,
     View,
@@ -8,26 +8,17 @@ import {
     TouchableOpacity
  } from 'react-native';
 //paths TMDB
-import {POSTER_PATH} from '../constants/TMDB'
+import {SET_URI_THUMBNAIL} from '../constants/TMDB'
 
 //assets
  import { Icon } from 'react-native-elements'
 
-const PreVisualizerMovie = props =>{
-
-    const [movieData, setMovieData] = useState([])
-
-    useEffect(()=>{
-      const sliceMovies = props.movies
-      setMovieData(sliceMovies)
-  },)
-
-    const SET_URI_THUMBNAIL = posterpath=>(`${POSTER_PATH}${posterpath}`)
+const PreVisualizerMovie = ({navigation, title, linkTo, movies}) =>{
     return(
             <View style={styles.PreVisualizerMovie}>
                 <View style={styles.TitleContainer}>
-                  <Text style={styles.Title}>{props.title}</Text>
-                  <TouchableOpacity style={styles.ChevronContainer} onPress={()=>{props.navigation.navigate(props.linkTo)}}>
+                  <Text style={styles.Title}>{title}</Text>
+                  <TouchableOpacity style={styles.ChevronContainer} onPress={()=>{navigation.navigate(linkTo)}}>
                     <Icon 
                     style={styles.Chevron} 
                     name='chevron-right' 
@@ -37,9 +28,9 @@ const PreVisualizerMovie = props =>{
                 </View>
                  <View style={styles.MainContainer}>
                     <FlatList
-                    data={movieData}
+                    data={movies}
                     renderItem={({ item }) => (
-                        <TouchableOpacity onPress={()=>{props.navigation.navigate('Movie')}} style={{ flex: 1, flexDirection: 'column', margin: 5}}>
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Movie', {movie: item})}} style={{ flex: 1, flexDirection: 'column', margin: 5}}>
                             <Image style={styles.imageThumbnail} source={{ uri: SET_URI_THUMBNAIL(item.poster_path)}}/>
                         </TouchableOpacity>
                     )}

@@ -1,20 +1,24 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+//redux
+import { Provider } from 'react-redux';
+import configureStore from './src/store/store';
 
 //screens
-import Feed from './src/screens/Feed';
+import FeedNavigator from './src/navigator/FeedNavigator';
 import Search from './src/screens/Search';
 import Profile from './src/screens/Profile';
 
+const store = configureStore();
 
 const TabAppNavigator = createBottomTabNavigator({
-  Feed,
+  FeedNavigator,
   Search,
   Profile
 },
 {
-  initialRouteName: 'Feed',
+  initialRouteName: 'FeedNavigator',
   tabBarOptions: {
     activeTintColor: 'tomato',
     inactiveTintColor: 'grey'
@@ -22,4 +26,14 @@ const TabAppNavigator = createBottomTabNavigator({
 })
 
 
-export default createAppContainer(TabAppNavigator);
+const AppContainer =  createAppContainer(TabAppNavigator);
+
+export default class App extends React.Component{
+  render(){
+    return(
+      <Provider store={store}>
+        <AppContainer/>
+      </Provider>
+    )
+  }
+}

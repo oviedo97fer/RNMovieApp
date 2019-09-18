@@ -1,23 +1,14 @@
 import React from 'react';
 import {ScrollView,View, Button, StyleSheet} from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+//redux
+import {connect} from 'react-redux';
+import { fetchPopularTMDB} from '../actions/fetchPopularTMDB';
+import {fetchUpcomingTMDB} from '../actions/fetchUpcomingTMDB';
 
 //components
 import PreVisualizerMovie from '../components/PreVisualizerMovie';
-//Screens
-import Movie from './Movie'
-import MostRecommend from './MostRecommend'
 
 class FeedScreen extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            mostRecommended: [],
-            upcomingMovies: [],
-            mostRecommendedList: []
-        }
-    }
-
     static navigationOptions = {
         title: 'Feed',
         headerTitleStyle: {
@@ -26,68 +17,46 @@ class FeedScreen extends React.Component{
             left: 10,
           },
       };
-
+    
+    
     componentDidMount(){
-        const POPULAR_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=b6fc688cd4de953bb732d2c1acc3ab66&language=en-US&page=1'
-        const UPCOMING_URL = 'https://api.themoviedb.org/3/movie/upcoming?api_key=b6fc688cd4de953bb732d2c1acc3ab66&language=en-US&page=1'
-        fetch(POPULAR_URL)
-            .then(res=>res.json())
-            .then(data=>{
-                this.setState({
-                    mostRecommended: data.results.slice(0,6),
-                    mostRecommendedList: data.results
-                })
-            })
-        fetch(UPCOMING_URL)
-            .then(res=> res.json())
-            .then(data=>{
-                this.setState({
-                    ...this.state,
-                    upcomingMovies: data.results.slice(0,6)
-                })
-            })
+        this.props.fetchPopularMovies(); 
+        this.props.fetchUpcomingMovies();
     }
     render(){
         return(
             <ScrollView>
+                
                 <PreVisualizerMovie 
                     navigation={this.props.navigation} 
                     title='Most Recommended' 
                     linkTo='MostRecommend' 
-                    movies={this.state.mostRecommended}
-                    listMovies={this.state.mostRecommendedList}
+                    movies={this.props.popularMovies}
                     />
-                {console.log(this.state.mostRecommended)}
                 <PreVisualizerMovie 
                     navigation={this.props.navigation} 
                     title='Upcoming Movies' 
                     linkTo='UpcomingMovies'
-                    movies={this.state.upcomingMovies}
-                    listMovies={this.state.mostRecommendedList}/>
+                    movies={this.props.upcomingMovies}
+                    />
             </ScrollView>
         )
     }
 } 
+//Redux
+const mapStateToProps = state => ({
+    popularMovies: state.popularMovies,
+    upcomingMovies: state.upcomingMovies,
+    hasErrored: state.moviesHasErrored,
+    isLoading: state.moviesIsLoading
+})
+
+const mapDispatchToProps = (dispatch) => {
+return {
+    fetchPopularMovies: () => dispatch(fetchPopularTMDB()),
+    fetchUpcomingMovies: () => dispatch(fetchUpcomingTMDB())}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(FeedScreen);
 
 
-//Stack Navigator
-const FeedNavigator = createStackNavigator(
-    {
-      FeedScreen,
-      Movie,
-      MostRecommend
-    },
-    {
-        defaultNavigationOptions:{
-                headerStyle: {
-                    backgroundColor: '#6271ef',
-                    height: 80,
-                    
-                },
-                headerTintColor: '#fff',
-                },
-               
-        } 
-  )
-
-export default FeedNavigator
