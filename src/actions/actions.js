@@ -2,6 +2,7 @@ export const FETCH_POPULAR_MOVIES_SUCCESS = 'FETCH_POPULAR_MOVIES_SUCCESS';
 export const MOVIES_HAS_ERRORED = 'MOVIES_HAS_ERRORED';
 export const MOVIES_IS_LOADING = 'MOVIES_IS_LOADING'
 export const FETCH_UPCOMING_MOVIES_SUCCESS = 'FETCH_UPCOMING_MOVIES_SUCCESS';
+export const HANDLE_SEARCH_CHANGE = 'HANDLE_SEARCH_CHANGE';
 
 export function fetchPopularTMDBSuccess(popularMovies) {
     return {
@@ -27,4 +28,11 @@ export function moviesIsLoading(bool) {
     type: MOVIES_IS_LOADING,
         isLoading: bool
     };
+}
+
+export function handleSearchChange(search){
+    return{
+        type: HANDLE_SEARCH_CHANGE,
+        search
+    }
 }
