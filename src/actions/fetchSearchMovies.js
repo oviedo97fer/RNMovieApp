@@ -14,5 +14,8 @@ export const fetchSearchMovies = (search)=>{
             console.log(search)
             dispatch(fetchSearchMoviesSuccess(res.results));           
         })
+        .catch(
+            console.log('error')
+        )
     }
 }

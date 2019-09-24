@@ -1,4 +1,9 @@
-import {FETCH_POPULAR_MOVIES_SUCCESS,FETCH_UPCOMING_MOVIES_SUCCESS,MOVIES_HAS_ERRORED,MOVIES_IS_LOADING,HANDLE_SEARCH_CHANGE} from '../actions/actions';
+import {FETCH_POPULAR_MOVIES_SUCCESS,
+        FETCH_UPCOMING_MOVIES_SUCCESS,
+        MOVIES_HAS_ERRORED,
+        MOVIES_IS_LOADING,
+        HANDLE_SEARCH_CHANGE, 
+        FETCH_SEARCH_CHANGE} from '../actions/actions';
 
 export function moviesHasErrored(state = false, action) {
     switch (action.type) {
@@ -38,7 +43,17 @@ export function upcomingMovies(state = [],action){
 export function handleSearchChange(state='',action){
     switch (action.type) {
         case HANDLE_SEARCH_CHANGE:
+            console.log(`handleinput:${action.search}`)
             return action.search    
+        default:
+            return state
+    }
+}
+
+export function queryMoviesResults(state=[],action){
+    switch (action.type) {
+        case FETCH_SEARCH_CHANGE:
+            return action.query    
         default:
             return state
     }

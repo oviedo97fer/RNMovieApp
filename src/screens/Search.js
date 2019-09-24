@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+import {connect} from 'react-redux'
 
 import Searcher from '../components/Searcher'
-export default class Search extends React.Component{
+
+class Search extends React.Component{
     
     render(){
         return(
@@ -12,3 +14,12 @@ export default class Search extends React.Component{
         )
     }
 }
+const mapStateToProps = state=>({
+    //query: state.handleSearchChange
+})
+const mapDispatchToProps = dispatch=>(
+    {
+
+    }
+)
+export default connect(mapStateToProps,mapDispatchToProps)(Search)

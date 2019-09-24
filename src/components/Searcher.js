@@ -1,15 +1,17 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { SearchBar } from 'react-native-elements';
 
 import {connect} from 'react-redux';
+import {fetchSearchMovies} from '../actions/fetchSearchMovies'
 import { handleSearchChange } from '../actions/actions';
 
-const Searcher = ({handleSearchChange, search}) =>{
+const Searcher = ({handleSearchChange, search,fetchSearchMovies}) =>{
     const updateSearch = searchChange => {
         handleSearchChange(searchChange)
     }
-    console.log(search)
-    
+    useEffect(() => {
+        fetchSearchMovies(search)
+    }, [search]);
     return(
         <SearchBar
             placeholder='Search movie..'
@@ -23,7 +25,9 @@ const Searcher = ({handleSearchChange, search}) =>{
 const mapStateToProps = state => ({
     search: state.handleSearchChange
 })
-const mapDispatchToProps = {handleSearchChange}
+const mapDispatchToProps = {
+    handleSearchChange,
+    fetchSearchMovies}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Searcher)
 
