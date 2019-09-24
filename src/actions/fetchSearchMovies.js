@@ -10,12 +10,10 @@ export const fetchSearchMovies = (search)=>{
         fetch(SEARCH_URL(search))
         .then(res => res.json())
         .then(res => {
-            console.log(res.results)
-            console.log(search)
             dispatch(fetchSearchMoviesSuccess(res.results));           
         })
         .catch(
-            console.log('error')
+            error => console.log(error)
         )
     }
 }

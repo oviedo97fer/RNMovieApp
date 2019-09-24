@@ -3,7 +3,7 @@ export const MOVIES_HAS_ERRORED = 'MOVIES_HAS_ERRORED';
 export const MOVIES_IS_LOADING = 'MOVIES_IS_LOADING'
 export const FETCH_UPCOMING_MOVIES_SUCCESS = 'FETCH_UPCOMING_MOVIES_SUCCESS';
 export const HANDLE_SEARCH_CHANGE = 'HANDLE_SEARCH_CHANGE';
-export const FETCH_SEARCH_CHANGE = 'FETCH_SEARCH_CHANGE';
+export const FETCH_SEARCH_MOVIES_SUCCESS = 'FETCH_SEARCH_MOVIES_SUCCESS';
 export function fetchPopularTMDBSuccess(popularMovies) {
     return {
         type: FETCH_POPULAR_MOVIES_SUCCESS,
@@ -37,8 +37,9 @@ export function handleSearchChange(search){
     }
 }
 export function fetchSearchMoviesSuccess(query){
+    console.log(`query: ${query}`)
     return{
-        type: FETCH_SEARCH_CHANGE,
+        type: FETCH_SEARCH_MOVIES_SUCCESS,
         query
     }
 }
