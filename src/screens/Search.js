@@ -1,8 +1,10 @@
 import React from 'react';
-import {View,Text} from 'react-native';
+import {View,Text,ScrollView} from 'react-native';
 import {connect} from 'react-redux'
 
+//comps
 import Searcher from '../components/Searcher'
+import ResultSearch from '../components/ResultSearch'
 
 class Search extends React.Component{
     
@@ -11,9 +13,12 @@ class Search extends React.Component{
         return(
             <View>
                 <Searcher/>
-                <View>
-                    {this.props.query.map(i=>(<Text>{i.title}</Text>))}
-                </View>
+                <ScrollView style={{marginBottom: 60}}>
+                    {this.props.query.map(movie=>(
+                        <ResultSearch data={movie} key={movie.id} navigation={this.props.navigation}/>
+                        //TODO: al momento de hacer click en el resultado, guardar en busquedas recientes con el action savedRecentlySearched()
+                        ))}
+                </ScrollView>
             </View>
         )
     }
@@ -23,7 +28,7 @@ const mapStateToProps = state=>({
 })
 const mapDispatchToProps = dispatch=>(
     {
-
+    //savedRecentlySearched
     }
 )
 export default connect(mapStateToProps,mapDispatchToProps)(Search)

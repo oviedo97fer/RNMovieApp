@@ -3,7 +3,8 @@ import {FETCH_POPULAR_MOVIES_SUCCESS,
         MOVIES_HAS_ERRORED,
         MOVIES_IS_LOADING,
         HANDLE_SEARCH_CHANGE, 
-        FETCH_SEARCH_MOVIES_SUCCESS} from '../actions/actions';
+        FETCH_SEARCH_MOVIES_SUCCESS,
+        SAVED_RECENTLY_SEARCHED} from '../actions/actions';
 
 export function moviesHasErrored(state = false, action) {
     switch (action.type) {
@@ -54,6 +55,15 @@ export function queryMoviesResults(state=[],action){
         case FETCH_SEARCH_MOVIES_SUCCESS:
             //console.log(action.query)
             return action.query    
+        default:
+            return state
+    }
+}
+
+export function savedRecentlySearched(state=[],action){
+    switch (action.type) {
+        case SAVED_RECENTLY_SEARCHED:
+            return action.recent
         default:
             return state
     }

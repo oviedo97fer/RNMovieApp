@@ -4,7 +4,8 @@ import { popularMovies,
          moviesHasErrored, 
          moviesIsLoading ,
          handleSearchChange,
-         queryMoviesResults} from './movies'
+         queryMoviesResults,
+         savedRecentlySearched} from './movies'
 
 export default combineReducers({
     popularMovies,
@@ -12,5 +13,6 @@ export default combineReducers({
     moviesHasErrored,
     moviesIsLoading,
     handleSearchChange,
-    queryMoviesResults
+    queryMoviesResults,
+    savedRecentlySearched
 });

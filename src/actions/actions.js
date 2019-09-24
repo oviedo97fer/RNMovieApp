@@ -4,6 +4,8 @@ export const MOVIES_IS_LOADING = 'MOVIES_IS_LOADING'
 export const FETCH_UPCOMING_MOVIES_SUCCESS = 'FETCH_UPCOMING_MOVIES_SUCCESS';
 export const HANDLE_SEARCH_CHANGE = 'HANDLE_SEARCH_CHANGE';
 export const FETCH_SEARCH_MOVIES_SUCCESS = 'FETCH_SEARCH_MOVIES_SUCCESS';
+export const SAVED_RECENTLY_SEARCHED = 'SAVED_RECENTLY_SEARCHED'
+
 export function fetchPopularTMDBSuccess(popularMovies) {
     return {
         type: FETCH_POPULAR_MOVIES_SUCCESS,
@@ -41,5 +43,12 @@ export function fetchSearchMoviesSuccess(query){
     return{
         type: FETCH_SEARCH_MOVIES_SUCCESS,
         query
+    }
+}
+
+export function savedRecentlySearched(recent){
+    return{
+        type: SAVED_RECENTLY_SEARCHED,
+        recent
     }
 }
