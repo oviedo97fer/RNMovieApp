@@ -6,19 +6,19 @@ import { Provider } from 'react-redux';
 import configureStore from './src/store/store';
 
 //screens
-import FeedNavigator from './src/navigator/FeedNavigator';
+import FeedDrawer from './src/navigator/FeedNavigator';
 import Search from './src/screens/Search';
 import Profile from './src/screens/Profile';
 
 const store = configureStore();
 
 const TabAppNavigator = createBottomTabNavigator({
-  FeedNavigator,
+  FeedDrawer,
   Search,
   Profile
 },
 {
-  initialRouteName: 'FeedNavigator',
+  initialRouteName: 'FeedDrawer',
   tabBarOptions: {
     activeTintColor: 'tomato',
     inactiveTintColor: 'grey'

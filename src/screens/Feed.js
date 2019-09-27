@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView,View, Button, StyleSheet} from 'react-native';
+import {ScrollView,StatusBar, StyleSheet} from 'react-native';
 //redux
 import {connect} from 'react-redux';
 import { fetchPopularTMDB} from '../actions/fetchPopularTMDB';
@@ -7,17 +7,24 @@ import {fetchUpcomingTMDB} from '../actions/fetchUpcomingTMDB';
 
 //components
 import PreVisualizerMovie from '../components/PreVisualizerMovie';
+import DrawerMenuBtn from '../contain/DrawerMenuBtn';
 
 class FeedScreen extends React.Component{
-    static navigationOptions = {
+    static navigationOptions = ({navigation})=>{
+        return {
         title: 'Feed',
         headerTitleStyle: {
             fontWeight: 'bold',
             fontSize: 30,
             left: 10,
           },
+        headerRight:(
+            <DrawerMenuBtn
+                onPress={()=>navigation.toggleDrawer()}
+            />
+        )
       };
-    
+    };
     
     componentDidMount(){
         this.props.fetchPopularMovies(); 
@@ -26,7 +33,7 @@ class FeedScreen extends React.Component{
     render(){
         return(
             <ScrollView>
-                
+                <StatusBar barStyle="light-content" backgroundColor="#6271ef" />
                 <PreVisualizerMovie 
                     navigation={this.props.navigation} 
                     title='Most Recommended' 

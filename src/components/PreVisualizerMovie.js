@@ -23,6 +23,8 @@ const PreVisualizerMovie = ({navigation, title, linkTo, movies}) =>{
                     style={styles.Chevron} 
                     name='chevron-right' 
                     type='material-community'
+                    size={35}
+                    color='#666'
                     />
                   </TouchableOpacity>
                 </View>
